@@ -1,7 +1,7 @@
 <template>
   <label class="input-bar" :class="theme">
     <input class="input-text" type="type" :id="id" :name="name" :placeholder="placeholder" v-model="currentValue"/>
-    <span v-if="iserror" class="input-error">{{error_msg}}</span>
+    <span v-if="error_msg != null" class="input-error">{{error_msg}}</span>
   </label>
 </template>
 
@@ -39,64 +39,65 @@ export default {
     }
   },
   data () {
+    const that = this
     return {
-      currentValue: '',
-      iserror: false,
-      error_msg: ''
+      currentValue: '', // 当前文本框的值
+      error_msg: '', // 错误信息
+      showState: { // 展示错误信息的事件
+        error: function (msg) {
+          that.error_msg = msg
+          return false
+        },
+        success: function () {
+          that.error_msg = null
+          return true
+        }
+      }
     }
   },
   watch: {
     currentValue () {
-      const that = this
-      if (that.required) {
-        that.isrequired()
-      }
-      if (that.rangeLen != null && (that.currentValue.length !== 0)) {
-        that.checkRangeLen()
-      }
+      this.validate()
     }
   },
   methods: {
-    isrequired () {
+    checkRequired () {
       const that = this
-      let val = that.currentValue
-      if (val === '' || val == null) {
-        that.showErr(that.requiredMessage)
-        return false
-      } else {
-        that.hideErr()
-        return true
+      if (that.required) {
+        let val = that.currentValue
+        if (val === '' || val == null) {
+          return that.showState.error(that.requiredMessage)
+        }
       }
+      return that.showState.success()
     },
     checkRangeLen () {
       const that = this
       let len = that.currentValue.length
-      if (len < that.rangeLen[0] || len > that.rangeLen[1]) {
-        that.showErr(that.rangeMessage)
-        return false
-      } else {
-        that.hideErr()
-        return true
+      let ranges = that.rangeLen
+      let size = ranges.length
+      /**
+        边界值为空且文本框值为空（不进行边界判断）
+       */
+      if (ranges != null && len !== 0) {
+        if (size === 1 && len < ranges[0]) {
+          // 单边边界
+          return that.showState.error(that.rangeMessage)
+        } else if (len < ranges[0] || len > ranges[1]) {
+          // 双边边界
+          return that.showState.error(that.rangeMessage)
+        }
       }
-    },
-    showErr (txt) {
-      const that = this
-      that.iserror = true
-      that.error_msg = txt
-    },
-    hideErr () {
-      const that = this
-      that.iserror = false
-      that.error_msg = ''
+      return that.showState.success()
     },
     validate () {
-      if (!this.isrequired()) {
+      const that = this
+      if (!that.checkRequired()) {
         return false
-      } else if (!this.checkRangeLen()) {
+      } else if (!that.checkRangeLen()) {
         return false
-      } else {
-        return true
       }
+      return true
     }
   }
 }

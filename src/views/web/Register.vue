@@ -23,8 +23,15 @@
                       class="margin-bottom-20"
                       :required="true"
                       requiredMessage="密码不可为空"
+                      ref="userpwd"
             ></lb-input>
-            <lb-input placeholder="重复密码" type="password" class="margin-bottom-20"></lb-input>
+            <lb-input placeholder="重复密码"
+                      type="password"
+                      class="margin-bottom-20"
+                      name="reuserpwd"
+                      id="reuserpwd"
+                      ref="reuserpwd"
+            ></lb-input>
 
             <button class="btn" tabindex="4" v-on:click="doRegister" onselectstart="return false">注册</button>
             <p class="bottom-p">已有账号，
@@ -51,8 +58,12 @@ export default {
     }
   },
   methods: {
-    doRegister: function () {
-      console.log(this.$refs['username'].validate())
+    doRegister () {
+      if (this.validateForm()) {
+        console.log('验证通过')
+      } else {
+        console.log('验证不通过')
+      }
       /*  let $this = this
       let data = 'username=' + $this.username
       axios.post('http://127.0.0.1:3000/register/submit',
@@ -62,6 +73,15 @@ export default {
       }).catch(function (e) {
         console.log('访问异常:' + e)
       })  */
+    },
+    validateForm () {
+      let refarry = this.$refs
+      for (let item in refarry) {
+        if (!refarry[item].validate()) {
+          return false
+        }
+      }
+      return true
     }
   }
 }

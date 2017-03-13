@@ -21,21 +21,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Register.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Register.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/web/Register.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="44" lean-forward="false" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+            <state relative-caret-position="210">
+              <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LbInput.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LbInput.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/LbInput.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="35" column="16" lean-forward="false" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="16" />
+            <state relative-caret-position="30">
+              <caret line="30" column="6" lean-forward="true" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -159,8 +159,8 @@
         <option value="$PROJECT_DIR$/src/assets/login_regist.css" />
         <option value="$PROJECT_DIR$/static/css/lb-input.css" />
         <option value="$PROJECT_DIR$/src/assets/lb-input.css" />
-        <option value="$PROJECT_DIR$/src/components/LbInput.vue" />
         <option value="$PROJECT_DIR$/src/views/web/Register.vue" />
+        <option value="$PROJECT_DIR$/src/components/LbInput.vue" />
       </list>
     </option>
   </component>
@@ -389,7 +389,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -495,12 +495,12 @@
       <option name="presentableId" value="Default" />
       <updated>1489056391813</updated>
       <workItem from="1489056393218" duration="44699000" />
-      <workItem from="1489408918400" duration="11299000" />
+      <workItem from="1489408918400" duration="16578000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55998000" />
+    <option name="totallyTimeSpent" value="61277000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -811,18 +811,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/LbInput.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/web/Register.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="35" column="16" lean-forward="false" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="16" />
+        <state relative-caret-position="210">
+          <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/web/Register.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/LbInput.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="44" lean-forward="false" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+        <state relative-caret-position="30">
+          <caret line="30" column="6" lean-forward="true" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
           <folding />
         </state>
       </provider>
