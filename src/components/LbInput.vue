@@ -1,6 +1,7 @@
 <template>
   <label class="input-bar" :class="theme">
-    <input class="input-text" type="type" :id="id" :name="name" :placeholder="placeholder" v-model="currentValue"/>
+    <input v-if="type === 'password'" class="input-text" type="password" :id="id" :name="name" :placeholder="placeholder" v-model="currentValue"/>
+    <input v-else class="input-text" type="text" :id="id" :name="name" :placeholder="placeholder" v-model="currentValue"/>
     <span v-if="error_msg != null" class="input-error">{{error_msg}}</span>
   </label>
 </template>
@@ -36,6 +37,14 @@ export default {
     rangeMessage: {
       type: String,
       default: '长度不对'
+    },
+    equalTo: {
+      type: String,
+      default: null
+    },
+    equalMessage: {
+      type: String,
+      default: '两次输入不一致'
     }
   },
   data () {
@@ -55,12 +64,21 @@ export default {
       }
     }
   },
+  computed: {
+    doValue () {
+      return this.currentValue
+    }
+  },
   watch: {
     currentValue () {
       this.validate()
+      this.setValue()
     }
   },
   methods: {
+    setValue () {
+      this.$emit('setValue')
+    },
     checkRequired () {
       const that = this
       if (that.required) {
@@ -75,11 +93,11 @@ export default {
       const that = this
       let len = that.currentValue.length
       let ranges = that.rangeLen
-      let size = ranges.length
       /**
         边界值为空且文本框值为空（不进行边界判断）
        */
       if (ranges != null && len !== 0) {
+        let size = ranges.length
         if (size === 1 && len < ranges[0]) {
           // 单边边界
           return that.showState.error(that.rangeMessage)
@@ -90,11 +108,23 @@ export default {
       }
       return that.showState.success()
     },
+    checkEqualTo () {
+      const that = this
+      let equalVal = that.equalTo
+      let val = that.currentValue
+      if (equalVal != null && val !== equalVal) {
+        return that.showState.error(that.equalMessage)
+      } else {
+        return that.showState.success()
+      }
+    },
     validate () {
       const that = this
       if (!that.checkRequired()) {
         return false
       } else if (!that.checkRangeLen()) {
+        return false
+      } else if (!that.checkEqualTo()) {
         return false
       }
       return true

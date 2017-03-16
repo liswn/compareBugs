@@ -11,10 +11,11 @@
                       type="text"
                       class="margin-bottom-20"
                       :required='true'
-                      requiredMessage="用户名不可为空"
+                      requiredMessage="请输入用户名"
                       :rangeLen="[6,12]"
                       rangeMessage="6~12位用户名"
                       ref="username"
+                      v-on:setValue="getInputValue"
             ></lb-input>
             <lb-input placeholder="密码"
                       id="userpwd"
@@ -22,8 +23,9 @@
                       type="password"
                       class="margin-bottom-20"
                       :required="true"
-                      requiredMessage="密码不可为空"
+                      requiredMessage="请输入密码"
                       ref="userpwd"
+                      v-on:setValue="getInputValue"
             ></lb-input>
             <lb-input placeholder="重复密码"
                       type="password"
@@ -31,6 +33,9 @@
                       name="reuserpwd"
                       id="reuserpwd"
                       ref="reuserpwd"
+                      :required="true"
+                      requiredMessage="请重复密码"
+                      :equalTo="userpwd"
             ></lb-input>
 
             <button class="btn" tabindex="4" v-on:click="doRegister" onselectstart="return false">注册</button>
@@ -42,8 +47,8 @@
   </div>
 </template>
 <script>
-/*  import axios from 'axios' */
 import LbInput from '../../components/LbInput.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'register',
@@ -53,26 +58,35 @@ export default {
   data () {
     return {
       username: '',
-      password: '',
-      repassword: ''
+      userpwd: '',
+      reuserpwd: ''
     }
   },
+  computed: mapState([
+    'count'
+  ]),
   methods: {
+    getInputValue () {
+      let refarry = this.$refs
+      for (let item in refarry) {
+        this[item] = this.$refs[item].currentValue
+      }
+    },
     doRegister () {
       if (this.validateForm()) {
-        console.log('验证通过')
+        let $this = this
+        let data = 'username=' + $this.username
+        this.$http.post('/register/submit',
+          data
+        ).then(function (result) {
+          console.log(result)
+        }).catch(function (e) {
+          console.log('访问异常:' + e)
+        })
       } else {
         console.log('验证不通过')
       }
-      /*  let $this = this
-      let data = 'username=' + $this.username
-      axios.post('http://127.0.0.1:3000/register/submit',
-        data
-      ).then(function (result) {
-        console.log(result)
-      }).catch(function (e) {
-        console.log('访问异常:' + e)
-      })  */
+      /*    */
     },
     validateForm () {
       let refarry = this.$refs

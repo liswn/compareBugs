@@ -1,5 +1,6 @@
 const express = require('express')
 const config = require('config-lite')
+const cors = require('cors')
 const pkg = require('../package')
 const routes = require('./routes/index')
 
@@ -7,15 +8,15 @@ const app = new express()
 
 //静态文件路径
 app.use(express.static('static'))
+app.use(cors({
+  origin:['http://192.168.199.222:8080'],
+  methods:['GET','POST'],
+  alloweHeaders:['Conten-Type', 'Authorization']
+}))
 
 //请求头跨域
 app.all('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-  res.header("X-Powered-By",' 3.2.1')
-  if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
-  else  next();
+  next();
 });
 
 //路由
