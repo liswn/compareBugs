@@ -5,7 +5,6 @@ import routers from './routers'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   linkActiveClass: 'active',
   saveScrollPosition: true,
   routes: routers
